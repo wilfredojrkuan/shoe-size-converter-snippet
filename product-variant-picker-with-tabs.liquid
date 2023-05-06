@@ -1,3 +1,36 @@
+<style>
+  .size-tabs-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .size-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .size-tab {
+    display: block;
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    color: #333;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  
+  .size-tab:hover,
+  .size-tab.active {
+    background-color: #333;
+    color: #fff;
+  }
+</style>
+
 {%- unless product.has_only_default_variant -%}
   {%- if block.settings.picker_type == 'button' -%}
     <div class="size-tabs-wrapper">
@@ -130,3 +163,63 @@
     </div>
   </div>
 </noscript>
+
+<script>
+  $(document).ready(function() {
+  $('.size-tabs a').click(function(e) {
+    e.preventDefault();
+    $('.size-tabs a').removeClass('active');
+    $(this).addClass('active');
+    var selectedTab = $(this).text();
+    if (selectedTab == "EU") {
+      $('input[name="Size"]').each(function() {
+        var usSize = parseFloat($(this).val());
+        var euSize = usSize + 33;
+        $(this).next().text(euSize);
+      });
+    } else if (selectedTab == "UK") {
+      $('input[name="Size"]').each(function() {
+        var usSize = parseFloat($(this).val());
+        var ukSize = usSize - 1;
+        $(this).next().text(ukSize);
+      });
+    } else {
+      $('input[name="Size"]').each(function() {
+        var usSize = parseFloat($(this).val());
+        $(this).next().text(usSize);
+      });
+    }
+  });
+});
+
+</script>
+
+<script>
+  $(document).ready(function() {
+  $('.size-tabs a').click(function(e) {
+    e.preventDefault();
+    $('.size-tabs a').removeClass('active');
+    $(this).addClass('active');
+    var selectedTab = $(this).text();
+    if (selectedTab == "EU") {
+      $('select[name="options[Size]"] option').each(function() {
+        var usSize = parseFloat($(this).val());
+        var euSize = usSize + 33;
+        $(this).text(euSize);
+      });
+    } else if (selectedTab == "UK") {
+      $('select[name="options[Size]"] option').each(function() {
+        var usSize = parseFloat($(this).val());
+        var ukSize = usSize - 1;
+        $(this).text(ukSize);
+      });
+    } else {
+      $('select[name="options[Size]"] option').each(function() {
+        var usSize = parseFloat($(this).val());
+        $(this).text(usSize);
+      });
+    }
+  });
+});
+
+</script>
