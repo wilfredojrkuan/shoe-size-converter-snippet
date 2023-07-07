@@ -1,5 +1,5 @@
 # shoe-size-converter-snippet
-Snippet for Shopify Dawn Theme that allows you to add a shoe size converter on Variant Picker block.
+This is an automatic shoe size converter which converts US to EU, and UK sizes and vice versa. 
 
 This uses jQuery
 
